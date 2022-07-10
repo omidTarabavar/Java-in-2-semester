@@ -1,0 +1,4 @@
+--module-path "C:\javafx-sdk-18.0.1\lib" --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics,javafx.media,javafx.properties,javafx.swing,javafx.web,javafx-swt
+
+
+--module-path ${PATH_TO_FX} --add-modules javafx.controls,javafx.fxml,javafx.base,javafx.graphics,javafx.media,javafx.properties,javafx.swing,javafx.web,javafx-swt 
