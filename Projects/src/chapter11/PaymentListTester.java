@@ -14,8 +14,8 @@ public class PaymentListTester {
         list = new PaymentList(size);
         do {
             System.out.println();
-            System.out.println("[1] ADD");
-            System.out.println("[2] DISPLAY");
+            System.out.println("[1] ADD PAYMENT");
+            System.out.println("[2] DISPLAY PAYMENTS");
             System.out.println("[3] IS FULL");
             System.out.println("[4] GET PAYMENT");
             System.out.println("[5] GET TOTAL");
