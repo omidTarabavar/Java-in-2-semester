@@ -1,9 +1,11 @@
 package chapter11;
+import javafx.scene.control.TextArea;
+
 import java.io.*;
 
 class TenantFileHandler
 {
-    public static void saveRecords(int noOfRoomsIn, TenantList listIn)
+    public static void saveRecords(int noOfRoomsIn, TenantList listIn, TextArea textArea)
     {
 
             try
@@ -30,12 +32,12 @@ class TenantFileHandler
             }
             catch(IOException ioe)
             {
-                System.out.println("Error writing file");
+                textArea.setText("Error writing file");
             }
 
     }
 
-    public static void readRecords(TenantList listIn)
+    public static void readRecords(TenantList listIn,TextArea textArea)
     {
 
         try
@@ -74,7 +76,7 @@ class TenantFileHandler
 
          catch(IOException ioe)
          {
-            System.out.println("No records found");
+                textArea.setText("No previous records found");
          }
 
     }
