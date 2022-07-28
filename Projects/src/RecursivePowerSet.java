@@ -18,6 +18,7 @@ public class RecursivePowerSet {
         String curr="";
         System.out.println("String : "+str);
         powerSet(index,str,curr);
+
     }
 }
 
