@@ -1,13 +1,16 @@
 package Chapter13;
 
+import java.util.function.Supplier;
+
 public class Temp {
     public static void main(String[] args) {
-        testMethod(Temp::sumOfNumbers); // ((x,y,z) -> sumOfNumbers(x,y,z)
-    }
-    static void testMethod(TempInterface tempInterface){
-        System.out.println(tempInterface.powTest(2,3,4));
-    }
-    static int sumOfNumbers(int a,int b,int c){
-        return a+b+c;
+        Supplier<Void> voidSupplier = new Supplier<>() {
+            @Override
+            public Void get() {
+                System.out.println("Hello");
+                return null;
+            }
+        };
+        voidSupplier.get();
     }
 }
