@@ -1,16 +1,22 @@
 package Chapter13;
 
-import java.util.function.Supplier;
+
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+
+import java.util.ArrayList;
 
 public class Temp {
+
     public static void main(String[] args) {
-        Supplier<Void> voidSupplier = new Supplier<>() {
-            @Override
-            public Void get() {
-                System.out.println("Hello");
-                return null;
-            }
-        };
-        voidSupplier.get();
+        Integer a = 20;
+        SimpleGenericClass<Integer> integerSimpleGenericClass = new SimpleGenericClass<>();
+        integerSimpleGenericClass.setValue(20);
+        method(integerSimpleGenericClass);
+    }
+    static void method(SimpleGenericClass<? extends Number> genericClass){
+        System.out.println(genericClass.getValue());
     }
 }

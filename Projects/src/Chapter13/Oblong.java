@@ -50,4 +50,9 @@ public class Oblong
 	{
 		return 2 * (length + height);
 	}
+
+	@Override
+	public String toString() {
+		return "Height: "+height+"\nLength: "+length + "\nArea: "+calculateArea()+"\nPerimeter: "+calculatePerimeter();
+	}
 }
