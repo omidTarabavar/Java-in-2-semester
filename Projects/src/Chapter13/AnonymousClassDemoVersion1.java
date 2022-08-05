@@ -2,24 +2,27 @@ package Chapter13;
 
 public class AnonymousClassDemoVersion1 {
     public static void main(String[] args) {
-        Oblong testOblong = new Oblong(8,8);
-
-        Checkable checkableObject1 = new Checkable() {
+        Customer testCustomer = new Customer("2A13","Omid",200);
+        Checkable checkableObject1 =new Checkable() {
             @Override
             public boolean check() {
-                return testOblong.getHeight() > 0 && testOblong.getLength() > 0;
+                int numberCount = 0;
+                int letterCount = 0;
+                if(testCustomer.getCustomerId().length() != 4){
+                    return false;
+                }else {
+                    for(int i = 0 ; i < testCustomer.getCustomerId().length();i++){
+                        if(Character.isLetter(testCustomer.getCustomerId().charAt(i))){
+                            letterCount += 1;
+                        }else if(Character.isDigit(testCustomer.getCustomerId().charAt(i))){
+                            numberCount += 1;
+                        }
+                    }
+                }
+                return (numberCount == 3 && letterCount == 1);
             }
         };
-
-        Checkable checkableObject2 = new Checkable() {
-            @Override
-            public boolean check() {
-                return testOblong.getLength() != testOblong.getHeight();
-            }
-        };
-
-        System.out.println("checkableObject1 is "+checkValidity(checkableObject1));
-        System.out.println("checkableObject2 is "+checkValidity(checkableObject2));
+        System.out.println(checkValidity(checkableObject1));
     }
 
     private static String checkValidity(Checkable object){
