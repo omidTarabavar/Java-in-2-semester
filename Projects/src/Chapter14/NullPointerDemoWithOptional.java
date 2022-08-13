@@ -2,7 +2,7 @@ package Chapter14;
 
 import java.util.Scanner;
 
-public class NullPointerDemo {
+public class NullPointerDemoWithOptional {
     public static void main(String[] args) {
         Scanner keyboard = new Scanner(System.in);
         Bank myBank = new Bank();
@@ -10,8 +10,6 @@ public class NullPointerDemo {
         myBank.addAccount("002","Quentin");
         System.out.print("Enter account number to search for: ");
         String account = keyboard.next();
-        if(myBank.getItem(account).isPresent()){
-            System.out.println(myBank.getItem(account).get().getAccountName());
-        }
+        myBank.getItem(account).ifPresent(value -> System.out.println(value.getAccountName()));
     }
 }

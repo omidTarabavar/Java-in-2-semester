@@ -1,6 +1,8 @@
 package Chapter14;
 
 import java.util.ArrayList;
+import java.util.Optional;
+
 public class Bank {
 
     ArrayList<BankAccount> list = new ArrayList<>();
@@ -20,13 +22,13 @@ public class Bank {
         return list.size();
     }
 
-    public BankAccount getItem(String accountNumberIn){
+    public Optional<BankAccount> getItem(String accountNumberIn){
         int index = search(accountNumberIn);
         if(index != -999){
-            return list.get(index);
+            return Optional.of(list.get(index));
         }
         else {
-            return null;
+            return Optional.empty();
         }
     }
 
@@ -39,27 +41,26 @@ public class Bank {
     }
 
     public boolean depositMoney(String accountNumberIn,double amountIn){
-        BankAccount acc = getItem(accountNumberIn);
-        if(acc != null){
+        if(getItem(accountNumberIn).isPresent()){
+            BankAccount acc = getItem(accountNumberIn).get();
             acc.deposit(amountIn);
             return true;
-        }
-        else{
+        }else {
             return false;
         }
     }
 
     public int withDrawMoney(String accountNumberIn,double amountIn){
-        BankAccount acc = getItem(accountNumberIn);
-        if(acc == null){
+        if(getItem(accountNumberIn).isPresent()){
+            BankAccount acc = getItem(accountNumberIn).get();
+            if(acc.getBalance() < amountIn){
+                return -1;
+            }else {
+                acc.withdraw(amountIn);
+                return 1;
+            }
+        }else {
             return 0;
-        }
-        else if(acc.getBalance() < amountIn){
-            return -1;
-        }
-        else {
-            acc.withdraw(amountIn);
-            return 1;
         }
     }
 
