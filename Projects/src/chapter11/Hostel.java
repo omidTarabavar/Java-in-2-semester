@@ -144,20 +144,24 @@ public class Hostel extends Application {
     }
 
     private void addHandler(){
-        String roomEntered = roomField1.getText();
-        String nameEntered = nameField.getText();
-        if(roomEntered.length() == 0 || nameEntered.length() == 0){
-            displayArea1.setText("Room number and name must be entered");
-        }else if(Integer.parseInt(roomEntered) < 1 || Integer.parseInt(roomEntered) > noOfRooms){
-            displayArea1.setText("There are only "+noOfRooms+" rooms");
-        }else if(list.search(Integer.parseInt(roomEntered)) != null){
-            displayArea1.setText("Room number "+Integer.parseInt(roomEntered) + " is occupied");
-        }else {
-            Tenant t = new Tenant(nameEntered,Integer.parseInt(roomEntered));
-            list.addTenant(t);
-            roomField1.setText("");
-            nameField.setText("");
-            displayArea1.setText("New tenant in room "+roomEntered+" successfully added");
+        try {
+            String roomEntered = roomField1.getText();
+            String nameEntered = nameField.getText();
+            if(roomEntered.length() == 0 || nameEntered.length() == 0){
+                displayArea1.setText("Room number and name must be entered");
+            }else if(Integer.parseInt(roomEntered) < 1 || Integer.parseInt(roomEntered) > noOfRooms){
+                displayArea1.setText("There are only "+noOfRooms+" rooms");
+            }else if(list.search(Integer.parseInt(roomEntered)) != null){
+                displayArea1.setText("Room number "+Integer.parseInt(roomEntered) + " is occupied");
+            }else {
+                Tenant t = new Tenant(nameEntered,Integer.parseInt(roomEntered));
+                list.addTenant(t);
+                roomField1.setText("");
+                nameField.setText("");
+                displayArea1.setText("New tenant in room "+roomEntered+" successfully added");
+            }
+        }catch (NumberFormatException e){
+            displayArea1.setText("Invalid room number "+e.getMessage()+"\nEnter whole numbers only!");
         }
     }
 
