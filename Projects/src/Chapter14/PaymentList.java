@@ -13,11 +13,12 @@ public class PaymentList {
 
     /** Constructor initialises the empty payment list and sets the maximum list size
      * @param MAX : The maximum number of payments in the list
+     * @throws HostelException If the list is sized with a non-positive value
      */
     public PaymentList(int MAX){
         pList = new ArrayList<>();
         if(MAX < 1){
-            throw new RuntimeException("invalid list size set "+MAX);
+            throw new HostelException("invalid list size set "+MAX);
         }else {
             this.MAX = MAX;
         }
