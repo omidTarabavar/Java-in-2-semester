@@ -1,6 +1,7 @@
 package Chapter14;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /** Collection class to hold a list of Payment objects
  * @author omidTarabavar
@@ -52,16 +53,10 @@ public class PaymentList {
 
     /** Reads the payment at the  given position in the list
      * @param position: The logical position of the payment in the list
-     * @return Returns the payment at the given logical position in the list or null if no payment at that logical position
+     * @return Returns an Optional which contain Payment if the position is valid or null if it's not valid
      */
-    public Payment getPayment(int position){
-        if(position < 1 || position > getTotal()){
-            // no objects found at given position
-            return null;
-        }else {
-            // take one off logical position to get ArrayList position
-            return pList.get(position-1);
-        }
+    public Optional<Payment> getPayment(int position){
+        return Optional.of(pList.get(position-1));
     }
 
     /** Calculates the total payments made by the tenant

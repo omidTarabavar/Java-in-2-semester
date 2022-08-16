@@ -10,6 +10,7 @@ public class NullPointerDemoWithOptional {
         myBank.addAccount("002","Quentin");
         System.out.print("Enter account number to search for: ");
         String account = keyboard.next();
-        myBank.getItem(account).ifPresent(value -> System.out.println(value.getAccountName()));
+//        myBank.getItem(account).ifPresent(value -> System.out.println(value.getAccountName()));
+        System.out.println(myBank.getItem(account).get().getAccountName());
     }
 }
