@@ -1,6 +1,7 @@
 package chapter11;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /** Collection class to hold a list of Payment objects
  * @author omidTarabavar
@@ -23,12 +24,12 @@ public class PaymentList {
      * @param payment : The payment to add
      * @return Returns true if the object was added successfully and false otherwise
      */
-    public boolean addPayment(Payment payment){
-        if(!isFull()){
-            pList.add(payment);
-            return true;
+    public void addPayment(Payment payment){
+        if(isFull()){
+            throw new HostelException("List is full");
         }
-        return false;
+        pList.add(payment);
+
     }
 
     /** Checks if the payment list is full
@@ -49,13 +50,13 @@ public class PaymentList {
      * @param position: The logical position of the payment in the list
      * @return Returns the payment at the given logical position in the list or null if no payment at that logical position
      */
-    public Payment getPayment(int position){
+    public Optional<Payment> getPayment(int position){
         if(position < 1 || position > getTotal()){
             // no objects found at given position
-            return null;
+            return Optional.empty();
         }else {
             // take one off logical position to get ArrayList position
-            return pList.get(position-1);
+            return Optional.of(pList.get(position-1));
         }
     }
 

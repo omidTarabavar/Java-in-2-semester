@@ -15,15 +15,15 @@ class TenantFileHandler
                 tenantWriter.writeInt(listIn.getTotal());
                 for(int i=1; i <= noOfRoomsIn; i++)
                 {
-                       if(listIn.getTenant(i) != null)
+                       if(listIn.getTenant(i).isPresent())
                        {
-                          tenantWriter.writeInt(listIn.getTenant(i).getRoom());
-                          tenantWriter.writeUTF(listIn.getTenant(i).getName());
-                          tenantWriter.writeInt(listIn.getTenant(i).getPayments().getTotal());
-                          for(int j = 1; j<= listIn.getTenant(i).getPayments().getTotal(); j++)
+                          tenantWriter.writeInt(listIn.getTenant(i).get().getRoom());
+                          tenantWriter.writeUTF(listIn.getTenant(i).get().getName());
+                          tenantWriter.writeInt(listIn.getTenant(i).get().getPayments().getTotal());
+                          for(int j = 1; j<= listIn.getTenant(i).get().getPayments().getTotal(); j++)
                           {
-                              tenantWriter.writeUTF(listIn.getTenant(i).getPayments().getPayment(j).getMonth());
-                              tenantWriter.writeDouble(listIn.getTenant(i).getPayments().getPayment(j).getAmount());
+                              tenantWriter.writeUTF(listIn.getTenant(i).get().getPayments().getPayment(j).get().getMonth());
+                              tenantWriter.writeDouble(listIn.getTenant(i).get().getPayments().getPayment(j).get().getAmount());
                            }
                        }
                 }

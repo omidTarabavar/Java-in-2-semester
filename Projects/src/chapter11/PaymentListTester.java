@@ -46,8 +46,11 @@ public class PaymentListTester {
         System.out.print("Enter Amount: ");
         double amount = keyBoard.nextDouble();
         Payment p = new Payment(month,amount);
-        boolean ok = list.addPayment(p);
-        if(!ok){
+        try {
+            list.addPayment(p);
+            System.out.println("Done");
+        }
+        catch (HostelException e){
             System.out.println("ERROR: List is full");
         }
     }
@@ -65,9 +68,8 @@ public class PaymentListTester {
     static void option4(PaymentList list){
         System.out.print("Enter payment number to retrieve: ");
         int num = keyBoard.nextInt();
-        Payment p = list.getPayment(num);
-        if(p != null){
-            System.out.println(p);
+        if(list.getPayment(num).isPresent()){
+            System.out.println(list.getPayment(num).get());
         }else {
             System.out.println("INVALID PAYMENT NUMBER");
         }

@@ -54,9 +54,11 @@ public class TenantListTester {
     static void option2(TenantList list){
         System.out.print("Enter Room: ");
         int room = keyboard.nextInt();
-        boolean ok = list.removeTenant(room);
-        if(!ok){
-            System.out.println("ERROR: No tenant with this room number");
+        try {
+            list.removeTenant(room);
+        }
+        catch (HostelException e){
+            System.out.println(e);
         }
     }
     static void option3(TenantList list){
@@ -66,19 +68,18 @@ public class TenantListTester {
     static void option4(TenantList list){
         System.out.print("Enter Room: ");
         int room = keyboard.nextInt();
-        Tenant tenant = list.search(room);
-        if(tenant != null){
-            System.out.println(tenant);
-        }else {
-            System.out.println("ERROR: No tenant with this room number");
+        try {
+            System.out.println(list.search(room).get());
+        }
+        catch (HostelException e){
+            System.out.println(e);
         }
     }
     static void option5(TenantList list){
         System.out.print("Enter tenant number to retrieve: ");
         int num = keyboard.nextInt();
-        Tenant tenant = list.getTenant(num);
-        if(tenant != null){
-            System.out.println(tenant);
+        if(list.getTenant(num).isPresent()){
+            System.out.println(list.getTenant(num).get());
         }else {
             System.out.println("INVALID TENANT NUMBER");
         }

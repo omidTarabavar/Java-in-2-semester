@@ -1,6 +1,7 @@
 package chapter11;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /** Collection class to hold a list of tenants
  * @author OmidTarabavar
@@ -32,28 +33,25 @@ public class TenantList {
 
     /** Removes the tenant in the given room number
      * @param room: The room number of the tenant to remove
-     * @return Returns true if the tenant is removed successfully or false otherwise
      */
-    public boolean removeTenant(int room){
-        Tenant findT = search(room);
-        if(findT != null){
-            tList.remove(findT);
-            return true;
+    public void removeTenant(int room){
+        if(search(room).isEmpty()){
+            throw new HostelException("ERROR: No tenant with this room number");
         }
-        return false;
+        tList.remove(search(room).get());
     }
 
     /** Searches for the tenant in the given room number
      * @param room: The room number to search for
      * @return Returns the tenant in the given room or null if no tenant in the given room
      */
-    public Tenant search(int room){
+    public Optional<Tenant> search(int room){
         for(Tenant currentTenant: tList){
             if(currentTenant.getRoom() == room){
-                return currentTenant;
+                return Optional.of(currentTenant);
             }
         }
-        return null;
+        throw new HostelException("ERROR: No tenant with this room number");
     }
 
     /** Reads the tenant at the given position in the list
@@ -61,11 +59,11 @@ public class TenantList {
      * @return Returns the tenant at the given logical position in the list
      * or null if no tenant at that logical position
      */
-    public Tenant getTenant(int position){
+    public Optional<Tenant> getTenant(int position){
         if(position < 1 || position > getTotal()){
-            return null;
+            return Optional.empty();
         }
-        return tList.get(position-1);
+        return Optional.of(tList.get(position-1));
     }
 
     /** Reports on whether or not the list is empty

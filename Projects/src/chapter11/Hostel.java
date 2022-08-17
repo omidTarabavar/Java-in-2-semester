@@ -151,7 +151,7 @@ public class Hostel extends Application {
                 displayArea1.setText("Room number and name must be entered");
             }else if(Integer.parseInt(roomEntered) < 1 || Integer.parseInt(roomEntered) > noOfRooms){
                 displayArea1.setText("There are only "+noOfRooms+" rooms");
-            }else if(list.search(Integer.parseInt(roomEntered)) != null){
+            }else if(list.search(Integer.parseInt(roomEntered)).isPresent()){
                 displayArea1.setText("Room number "+Integer.parseInt(roomEntered) + " is occupied");
             }else {
                 Tenant t = new Tenant(nameEntered,Integer.parseInt(roomEntered));
@@ -171,8 +171,8 @@ public class Hostel extends Application {
         }else {
             displayArea1.setText("Room" + "\t"+ "Name" + "\n");
             for(int i = 1 ; i <= noOfRooms ; i++){
-                if(list.search(i) != null) {
-                    displayArea1.appendText(list.search(i).getRoom() + "\t\t" + list.search(i).getName() + "\n");
+                if(list.search(i).isPresent()) {
+                    displayArea1.appendText(list.search(i).get().getRoom() + "\t\t" + list.search(i).get().getName() + "\n");
                 }
             }
 
@@ -184,11 +184,11 @@ public class Hostel extends Application {
             displayArea1.setText("Room number must be entered");
         }else if(Integer.parseInt(roomEntered) < 1 || Integer.parseInt(roomEntered) > noOfRooms) {
             displayArea1.setText("Invalid room number");
-        }else if(list.search(Integer.parseInt(roomEntered)) == null){
+        }else if(list.search(Integer.parseInt(roomEntered)).isEmpty()){
             displayArea1.setText("Room number "+roomEntered+" is empty");
         }else {
 
-            displayArea1.setText("Name of tenant: "+list.search(Integer.parseInt(roomEntered)).getName());
+            displayArea1.setText("Name of tenant: "+list.search(Integer.parseInt(roomEntered)).get().getName());
         }
     }
     private void removeHandler(){
@@ -197,7 +197,7 @@ public class Hostel extends Application {
             displayArea1.setText("Room number must be entered");
         }else if(Integer.parseInt(roomEntered) < 1 || Integer.parseInt(roomEntered) > noOfRooms){
             displayArea1.setText("Invalid room number");
-        }else if(list.search(Integer.parseInt(roomEntered)) == null){
+        }else if(!list.search(Integer.parseInt(roomEntered)).isPresent()){
             displayArea1.setText("Room number "+roomEntered+" is empty");
         }else {
             list.removeTenant(Integer.parseInt(roomEntered));
@@ -214,13 +214,13 @@ public class Hostel extends Application {
             displayArea2.setText("Room number, month and amount must all be entered");
         }else if (Integer.parseInt(roomEntered) < 1 || Integer.parseInt(roomEntered) > noOfRooms){
             displayArea2.setText("Invalid room number");
-        }else if (list.search(Integer.parseInt(roomEntered)) == null){
+        }else if (list.search(Integer.parseInt(roomEntered)).isEmpty()){
             displayArea2.setText("Room number "+roomEntered+" is empty");
         }else if(Double.parseDouble(amountEntered) <= 0){
             displayArea2.setText("Invalid payment amount");
         }else {
             Payment p = new Payment(monthEntered,Double.parseDouble(amountEntered));
-            list.search(Integer.parseInt(roomEntered)).makePayment(p);
+            list.search(Integer.parseInt(roomEntered)).get().makePayment(p);
             displayArea2.setText("Payment recorded");
         }
     }
@@ -231,10 +231,10 @@ public class Hostel extends Application {
             displayArea2.setText("Room number must be entered");
         }else if (Integer.parseInt(roomEntered) < 1 || Integer.parseInt(roomEntered) > noOfRooms){
             displayArea2.setText("Invalid room number");
-        }else if (list.search(Integer.parseInt(roomEntered)) == null){
+        }else if (list.search(Integer.parseInt(roomEntered)).isEmpty()){
             displayArea2.setText("Room number "+Integer.parseInt(roomEntered) + " is empty");
         }else {
-            Tenant t = list.search(Integer.parseInt(roomEntered));
+            Tenant t = list.search(Integer.parseInt(roomEntered)).get();
             PaymentList p = t.getPayments();
             if(p.getTotal()  == 0){
                 displayArea2.setText("No payments made for this tenant");
@@ -242,8 +242,8 @@ public class Hostel extends Application {
                 NumberFormat nf = NumberFormat.getCurrencyInstance();
                 displayArea2.setText("Month"+"\t\t"+"Amount"+"\n");
                 for (int i = 1 ; i <= p.getTotal() ; i++){
-                    String s = nf.format(p.getPayment(i).getAmount());
-                    String spacing = makeSpacing(t.getPayments().getPayment(i).getMonth());
+                    String s = nf.format(p.getPayment(i).get().getAmount());
+                    String spacing = makeSpacing(p.getPayment(i).get().getMonth());
                     displayArea2.appendText(""+spacing+"\t\t"+s+"\n");
                 }
                 displayArea2.appendText("\n"+"Total paid so far : "+nf.format(p.calculateTotalPaid()));
