@@ -48,4 +48,8 @@ public class Book {
         return isbn.equals(bookIn.isbn);
     }
 
+    @Override
+    public int hashCode() {
+        return isbn.hashCode();
+    }
 }
