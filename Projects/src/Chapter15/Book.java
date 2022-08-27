@@ -44,6 +44,10 @@ public class Book {
 
     @Override
     public boolean equals(Object obj) {
+        // this codes are omid's added codes and the j2s book didn't mention it
+        if (getClass() != obj.getClass())
+            return false;
+        // ####################################################################
         Book bookIn = (Book) obj;
         return isbn.equals(bookIn.isbn);
     }
