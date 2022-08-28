@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class Book {
+public class Book implements Comparable<Book>{
     private String isbn;
     private String title;
     private String author;
@@ -55,5 +55,10 @@ public class Book {
     @Override
     public int hashCode() {
         return isbn.hashCode();
+    }
+
+    @Override
+    public int compareTo(Book o) {
+        return isbn.compareTo(o.isbn);
     }
 }
