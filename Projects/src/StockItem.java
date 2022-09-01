@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class StockItem {
     final String stockNumber;
     final String name;
@@ -32,5 +34,23 @@ public class StockItem {
     }
     static void setSalesTax(double saleTaxIn){
         salesTax = saleTaxIn;
+    }
+
+    @Override
+    public String toString() {
+        return "( "+stockNumber+", "+name+", "+price+", "+totalStock+" )";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (getClass() != obj.getClass())
+            return false;
+        StockItem stockItem = (StockItem) obj;
+        return stockNumber.equals(stockItem.stockNumber);
+    }
+
+    @Override
+    public int hashCode() {
+        return stockNumber.hashCode();
     }
 }
