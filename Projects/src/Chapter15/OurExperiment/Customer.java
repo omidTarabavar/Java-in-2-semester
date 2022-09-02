@@ -2,13 +2,14 @@ package Chapter15.OurExperiment;
 
 import java.util.*;
 
-public class Customer {
+public class Customer implements Comparable<Customer>{
     int priority;
     int customerNumber;
     public Customer(int customerNumber,int priority){
         this.priority = priority;
         this.customerNumber = customerNumber;
     }
+
 
     @Override
     public String toString() {
@@ -23,14 +24,17 @@ public class Customer {
         customerList.add(new Customer(4,0));
         customerList.add(new Customer(5,0));
         System.out.println("Before sort: "+customerList);
-        customerList.sort((customer1,customer2) ->{
-            int comparison = Integer.compare(customer1.priority,customer2.priority) *(-1);
-            if(comparison == 0){
-                comparison = Integer.compare(customer1.customerNumber,customer2.customerNumber);
-            }
-            return comparison;
-        });
+        customerList.sort(Customer::compareTo);
         System.out.println("After sort: "+customerList);
 
+    }
+
+    @Override
+    public int compareTo(Customer obj) {
+        int comparison = Integer.compare(priority,obj.priority)*(-1);
+        if(comparison == 0){
+            comparison = Integer.compare(customerNumber, obj.customerNumber);
+        }
+        return comparison;
     }
 }

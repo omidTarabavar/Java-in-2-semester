@@ -33,7 +33,4 @@ public class Library {
         books.forEach((key,book) -> bookSet.add(book));
         return bookSet;
     }
-    public static void main(String[] args) {
-
-    }
 }
