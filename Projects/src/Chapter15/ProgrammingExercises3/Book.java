@@ -43,7 +43,7 @@ public class Book implements Comparable<Book>{
 
     @Override
     public boolean equals(Object obj) {
-        // this codes are omid's added codes and the j2s book didn't mention it
+        // these codes are omid's added codes and the j2s book didn't mention it
         if (getClass() != obj.getClass())
             return false;
         // ####################################################################
