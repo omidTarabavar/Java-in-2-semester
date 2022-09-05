@@ -1,4 +1,4 @@
-package Chapter15.ProgrammingExercises3;
+package Chapter15.ProgrammingExercises;
 
 import java.util.*;
 
