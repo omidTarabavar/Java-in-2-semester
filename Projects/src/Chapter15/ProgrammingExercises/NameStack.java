@@ -12,7 +12,7 @@ public class NameStack {
         stack.add(name);
     }
     public String pop() throws NameStackException {
-        if(stack.isEmpty()){
+        if(isEmpty()){
             throw new NameStackException();
         }
         return stack.remove(stack.size()-1);
