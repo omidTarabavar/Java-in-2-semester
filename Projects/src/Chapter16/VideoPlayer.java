@@ -22,7 +22,7 @@ public class VideoPlayer extends Application {
 
     @Override
     public void start(Stage stage) {
-        File file = new File("Trees.mp4");
+        File file = new File("E:\\GitHub\\Java-in-2-semester\\Projects\\src\\Files\\Trees.mp4");
         Media media = new Media(file.toURI().toString());
         MediaPlayer mp = new MediaPlayer(media);
         MediaView mv = new MediaView(mp);
